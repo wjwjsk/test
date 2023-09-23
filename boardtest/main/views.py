@@ -11,8 +11,8 @@ def social_login_view(request):
 
 
 def article_list(request):
-    articles = Article.objects.all()
-    return render(request, "article_list.html", {"articles": articles})
+    # DB 불러오기
+    return render(request, "article_list.html")
 
 
 def article_create(request):
@@ -33,7 +33,6 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            # 폼 데이터 처리
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)

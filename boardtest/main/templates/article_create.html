@@ -13,11 +13,7 @@
     <form method="post">
         {% csrf_token %}
         <input type="text" name="title">
-        {% if user.is_authenticated %}
-            <p>작성자 : {{ user.username }}</p>
-        {% else %}
-            <p>작성자 : 익명</p>
-        {% endif %}
+        <p>작성자 : 현재 로그인 한 계정명으로 바꿔보세요(미로그인시 익명)</p>
         
         <textarea name="content"></textarea>
         <button type="submit">작성</button>

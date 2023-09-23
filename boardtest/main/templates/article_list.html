@@ -10,24 +10,21 @@
 </head>
 <body>
     <h1>게시판</h1>
-    {% if user.is_authenticated %}
-        안녕하세요, {{ user.username }}님!  <a href="{% url 'logout' %}">로그아웃</a>
+    {% comment %} 로그인시 {% endcomment %}
+        안녕하세요, (접속id 표시)님!  <a href="{% url 'logout' %}">로그아웃</a>
         <p><a href="{% url 'article_create' %}">글 작성</a></p>
-    {% else %}
+    {% comment %} 미로그인시 {% endcomment %}
         <a href="{% url 'login' %}">로그인</a>
         <a href="{% url 'article_create' %}">글 작성</a>
-    {% endif %}
     
     <ul>
-        {% for article in articles reversed %}
+        {% comment %} 최근 게시물이 위로 올라오게 해보세요 {% endcomment %}
         <li>
-            <h2>{{article.id}}.  {{article.title}}</h2>
-            <h3>{{article.id_name}}</h3>
-            <p>{{article.content}}</p>
-            <p>{{article.created_at}}</p>
-            
+            <h2>순번.  제목</h2>
+            <h3>작성자명</h3>
+            <p>내용</p>
+            <p>작성일</p>
         </li>
-        {% endfor %}
     </ul>
 </body>
 <script src="{% static '/js/script.js' %}" defer></script>

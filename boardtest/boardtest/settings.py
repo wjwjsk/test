@@ -11,21 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import json
-import os
 
-with open("boardtest/config.json") as f:
-    json_object = json.load(f)
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = json_object["DJANGO_SECRET_KEY"]
+SECRET_KEY = ""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,13 +35,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "main",
-    "social_django",
 ]
 
 # google social login settings
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = json_object["SOCIAL_AUTH"]["GOOGLE_KEY"]
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = json_object["SOCIAL_AUTH"]["GOOGLE_SECRET_KEY"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ""
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URL = "http://127.0.0.1:8000/complete/google-oauth2/"
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GoogleOAuth2",
@@ -92,10 +83,10 @@ WSGI_APPLICATION = "boardtest.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": json_object["DATABASES"]["NAME"],
-        "USER": json_object["DATABASES"]["USER"],
-        "PASSWORD": json_object["DATABASES"]["PASSWORD"],
-        "HOST": json_object["DATABASES"]["HOST"],
+        "NAME": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
         "PORT": 5432,
     }
 }
@@ -123,16 +114,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "ko-ko"
+LANGUAGE_CODE = ""
 
-TIME_ZONE = "Asia/Seoul"
+TIME_ZONE = ""
 
 USE_I18N = True
 
 USE_TZ = False
 
-LOGIN_REDIRECT_URL = "article_list"
-LOGOUT_REDIRECT_URL = "article_list"
+LOGIN_REDIRECT_URL = ""
+LOGOUT_REDIRECT_URL = ""
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
