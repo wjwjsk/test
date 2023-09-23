@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from .models import Article
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from .forms import LoginForm
 
 
 # Create your views here.
 def social_login_view(request):
-    return render(request, "main/social_login.html")
+    return render(request, "social_login.html")
+
 
 def article_list(request):
     articles = Article.objects.all()
-    return render(request, "main/article_list.html", {"articles": articles})
+    return render(request, "article_list.html", {"articles": articles})
 
 
 def article_create(request):
@@ -24,7 +26,23 @@ def article_create(request):
         Article.objects.create(title=title, content=content, id_name=id_name)
         return redirect("article_list")
 
-    return render(request, "main/article_create.html")
+    return render(request, "article_create.html")
+
+def login_view(request):
+    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            # 폼 데이터 처리
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("article_list")
+        else:
+            form = LoginForm()
+    return render(request, "login.html",{'form':form})
 
 
 def logout_request(request):
@@ -40,4 +58,4 @@ def register_view(request):
             user = form.save()
             login(request, user)
             return redirect("article_list")
-    return render(request, "main/register.html", {"form": form})
+    return render(request, "register.html", {"form": form})
