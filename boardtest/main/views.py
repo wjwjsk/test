@@ -12,7 +12,8 @@ def social_login_view(request):
 
 def article_list(request):
     # DB 불러오기
-    return render(request, "article_list.html")
+    datas = Article.objects.all()
+    return render(request, "article_list.html", {"datas": datas})
 
 
 def article_create(request):
@@ -28,20 +29,21 @@ def article_create(request):
 
     return render(request, "article_create.html")
 
+
 def login_view(request):
     form = LoginForm()
-    if request.method == 'POST':
+    if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect("article_list")
         else:
             form = LoginForm()
-    return render(request, "login.html",{'form':form})
+    return render(request, "login.html", {"form": form})
 
 
 def logout_request(request):

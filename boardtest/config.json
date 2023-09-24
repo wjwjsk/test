@@ -1,0 +1,13 @@
+{
+    "DJANGO_SECRET_KEY": "django-insecure-o_0!)q9zp)#$9q_2z)vzqaa4t#kn)7r!x+&bsl8z6)y=f&1#-i",
+    "DATABASES": {
+        "NAME": "study",
+        "USER": "study_user",
+        "PASSWORD": "1234",
+        "HOST": "221.151.163.238"
+    },
+    "SOCIAL_AUTH": {
+        "GOOGLE_KEY": "1048575531471-e6mtjm9e78jvrsi37aai338jq8dg6p5p.apps.googleusercontent.com",
+        "GOOGLE_SECRET_KEY": "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"
+    }
+}

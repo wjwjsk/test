@@ -9,7 +9,12 @@
     <title>Document</title>
 </head>
 <body>
-    {% comment %} form 필요부분 {% endcomment %}
+    <form method="post">
+        <h2>login</h2>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" id="bnt">login</button>
+        </form>
     <p><a href="{% url 'social:begin' 'google-oauth2' %}">Google 로그인</a></p>
     <a href="{% url 'register' %}">회원가입 하기</a>
     

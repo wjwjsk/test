@@ -11,13 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import json
 
-
+with open("config.json") as f:
+    config = json.load(f)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+SECRET_KEY = config["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,11 +36,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "main",
+    "social_django",
 ]
 
 # google social login settings
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ""
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config["SOCIAL_AUTH"]["GOOGLE_KEY"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config["SOCIAL_AUTH"]["GOOGLE_SECRET_KEY"]
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URL = "http://127.0.0.1:8000/complete/google-oauth2/"
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GoogleOAuth2",
@@ -82,10 +86,10 @@ WSGI_APPLICATION = "boardtest.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "",
-        "USER": "",
-        "PASSWORD": "",
-        "HOST": "",
+        "NAME": config["DATABASES"]["NAME"],
+        "USER": config["DATABASES"]["USER"],
+        "PASSWORD": config["DATABASES"]["PASSWORD"],
+        "HOST": config["DATABASES"]["HOST"],
         "PORT": 5432,
     }
 }
@@ -98,22 +102,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ko-ko"
 
 TIME_ZONE = "UTC"
 
